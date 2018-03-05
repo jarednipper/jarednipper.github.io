@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Treefort App</title>
+  
+  
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css'>
+
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+
+  <section class="section" id="app">
+  
+  <div class="container">
+    
+    <div class="modal" v-bind:class="{ 'is-active':showArtistModal }">
+      <div class="modal-background" @click="showArtistModal = false" ></div>
+      <div class="modal-card">
+        <section class="modal-card-body">
+          <artist-details :event="selectedEvent" v-if="selectedEvent != null"></artist-details>
+        </section>
+      </div>
+    </div>
+    
+    <div class="control">
+      <div class="select">
+        <select v-model="selectedVenue" @change="venueSelected()">
+          <option :value="null">All Venues</option>
+          <option v-for="venue in venues()">{{ venue }}</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="control">
+      <div class="select">
+        <select v-model="selectedGenre" @change="genreSelected()">
+          <option :value="null">All Genres</option>
+          <option v-for="genre in genres()">{{ genre }}</option>
+        </select>
+      </div>
+    </div>
+    
+    <p class="control is-expanded">
+      <input v-model="searchValue" class="input" type="text" placeholder="Artist" @keyUp="searchArtist">
+    </p>
+
+    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+      <thead> 
+        <tr>
+          <th><a @click="sortByArtist">Artist</a></th>
+          <th><a @click="sortByTime">Time</a></th>
+          <th><a @click="sortByVenue">Venue</a></th>
+        </tr>
+      </thead>
+      <tr v-for="result in results" v-bind:class="{ strike:result.cancelled }" v-cloak>
+        <td class="table-artist-name">
+          <a @click="setSelectedEvent(result)" target="_new">{{ result.name }}</a>
+        </td>
+        <td>{{ result.start_time_moment.format("ddd h:mma") }}</td>
+        <td><a :href="venueUrl(result.venue)">{{ result.venue.name }}</a></td>
+      </tr>
+    </table>
+  </div>
+</section>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.js'></script>
+<script src='https://unpkg.com/vue'></script>
+<script src='https://use.fontawesome.com/releases/v5.0.6/js/all.js'></script>
+
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>
