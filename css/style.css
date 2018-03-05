@@ -6,4 +6,8 @@
   text-decoration: line-through;
 }
 
+td {
+  font-size: 20px;
+}
+
 [v-cloak] { display:none; }

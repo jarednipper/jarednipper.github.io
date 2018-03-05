@@ -112,7 +112,7 @@ new Vue({
       this.results = this.results.sort(function(a, b) {
         if (a.venue.name.toLowerCase() < b.venue.name.toLowerCase()) return -1;
         if (a.venue.name.toLowerCase() > b.venue.name.toLowerCase()) return 1;
-        
+
         return a.start_time_moment - b.start_time_moment;
       });
     },
@@ -120,7 +120,7 @@ new Vue({
       this.results = this.results.sort(function(a, b) {
         if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
         if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
-        
+
         return a.start_time_moment - b.start_time_moment;
       });
     },
@@ -138,7 +138,7 @@ new Vue({
       if (this.selectedVenue === null) {
         this.results = this.events;
       } else {
-        this.results = this.results.filter(e => e.venue.name == this.selectedVenue);
+        this.results = this.events.filter(e => e.venue.name == this.selectedVenue);
       }
     },
     genres() {
@@ -149,7 +149,7 @@ new Vue({
         this.results = this.events;
       } else {
         var names = this.performers.filter(p => p.genres != null && p.genres.includes(this.selectedGenre)).map(p => p.name);
-        this.results = this.results.filter(e => names.includes(e.name))
+        this.results = this.events.filter(e => names.includes(e.name))
       }
     },
   },
@@ -191,7 +191,7 @@ new Vue({
           window.localStorage.setItem("treefortEvents", JSON.stringify(self.events));
           window.localStorage.setItem("treefortEventsTime", moment());
         });
-      
+
       fetch("https://api.tmf.zone/prod/v1/performers")
         .then(response => response.json())
         .then(function(data) {
