@@ -1,13 +1,9 @@
-.table-artist-name {
-  max-width: 230px;
+body {
+  font-size: 28px;
 }
 
 .strike {
   text-decoration: line-through;
-}
-
-td {
-  font-size: 20px;
 }
 
 [v-cloak] { display:none; }
