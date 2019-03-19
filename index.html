@@ -30,7 +30,7 @@
 
     <div class="field">
       <div class="control">
-        <div class="select is-fullwidth">
+        <div class="select is-fullwidth is-large">
           <select v-model="selectedVenue" @change="venueSelected()">
             <option :value="null">All Venues</option>
             <option v-for="venue in venues()">{{ venue }}</option>
@@ -41,7 +41,7 @@
 
     <div class="field">
       <div class="control">
-        <div class="select is-fullwidth">
+        <div class="select is-fullwidth is-large">
           <select v-model="selectedGenre" @change="genreSelected()">
             <option :value="null">All Genres</option>
             <option v-for="genre in genres()">{{ genre }}</option>
@@ -52,7 +52,7 @@
 
     <div class="field">
       <div class="control is-expanded">
-        <input v-model="searchValue" class="input" type="text" placeholder="Artist" @keyUp="searchArtist">
+        <input v-model="searchValue" class="input is-large" type="text" placeholder="Artist" @keyUp="searchArtist">
       </div>
     </div>
 
