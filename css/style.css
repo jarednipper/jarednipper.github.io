@@ -6,4 +6,8 @@ body {
   text-decoration: line-through;
 }
 
+.table-artist-name {
+  max-width: 230px;
+}
+
 [v-cloak] { display:none; }
