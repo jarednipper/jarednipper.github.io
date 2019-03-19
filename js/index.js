@@ -26,7 +26,7 @@ Vue.component('artist-details', {
         <img v-bind:src="details.image_app_url" style="width: 100%" />
 
         <!--<p>{{ details.bio }}</p>-->
-        <audio v-bind:src="details.song.stream_url" preload="none" controls="">
+        <!--<audio v-bind:src="details.song.stream_url" preload="none" controls=""></audio>-->
 
       </div>
 
