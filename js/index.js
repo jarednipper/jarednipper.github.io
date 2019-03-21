@@ -4,28 +4,26 @@ Vue.component('artist-details', {
       <div v-if="isLoaded">
         <section class="hero is-dark is-bold">
           <div class="hero-body">
-            <div class="columns">
-              <div class="column">
-                <h1 class="title">
-                  <span v-bind:class="{ strike:event.cancelled }">{{ details.name }}</span>
-                  <span v-if="event.cancelled">(CANCELLED)</span>
-                </h1>
-                <h2 class="subtitle">{{ details.home_town }}</h2>
-                <div class="tags">
-                  <span v-for="genre in details.genres" class="tag is-black">{{ genre }}</span>
-                </div>
-              </div>
-              <div class="column is-one-third">
-                 <p>{{ event.venue.name }}</p>
-                 <p>{{ event.start_time_moment.format("ddd h:mm") }} - {{ event.end_time_moment.format("h:mma") }}</p>
-              </div>
+            <div>
+              <span v-bind:class="{ 'artist-name': true, strike:event.cancelled }">{{ details.name }}</span>
+              <span v-if="event.cancelled">(CANCELLED)</span>
+            </div>
+            <div>{{ details.home_town }}</div>
+            <div class="tags">
+              <span v-for="genre in details.genres" class="tag is-black">{{ genre }}</span>
+            </div>
+
+            <p>{{ event.venue.name }}</p>
+            <p>{{ event.start_time_moment.format("ddd h:mm") }} - {{ event.end_time_moment.format("h:mma") }}</p>
+            <div>
+              <img v-bind:src="details.image_app_url" style="width: 100%" />
+            </div>
+            <div>
+              <p class="artist-bio">{{ details.bio || "" }}</p>
             </div>
           </div>
         </section>
 
-        <img v-bind:src="details.image_app_url" style="width: 100%" />
-
-        <!--<p>{{ details.bio }}</p>-->
         <!--<audio v-bind:src="details.song.stream_url" preload="none" controls=""></audio>-->
 
       </div>
@@ -53,7 +51,7 @@ Vue.component('artist-details', {
       var self = this;
       fetch("https://api.tmf.zone/prod/v1/performers/" + this.event.performers[0].id)
         .then(response => response.json())
-        .then(function(data) {
+        .then(function (data) {
           self.details = data.body;
           self.isLoaded = true;
         });
@@ -63,7 +61,7 @@ Vue.component('artist-details', {
     this.getEvent();
   },
   watch: {
-    event: function() {
+    event: function () {
       this.isLoaded = false;
       this.getEvent();
     },
@@ -90,7 +88,7 @@ new Vue({
       this.results = this.events.filter(e => e.name.toLowerCase().includes(this.searchValue.toLowerCase()));
     },
     sortByTime() {
-      this.results.sort(function(a, b) {
+      this.results.sort(function (a, b) {
         return a.start_time_moment - b.start_time_moment;
       });
     },
@@ -109,7 +107,7 @@ new Vue({
       });
     },
     sortByVenue() {
-      this.results = this.results.sort(function(a, b) {
+      this.results = this.results.sort(function (a, b) {
         if (a.venue.name.toLowerCase() < b.venue.name.toLowerCase()) return -1;
         if (a.venue.name.toLowerCase() > b.venue.name.toLowerCase()) return 1;
 
@@ -117,7 +115,7 @@ new Vue({
       });
     },
     sortByArtist() {
-      this.results = this.results.sort(function(a, b) {
+      this.results = this.results.sort(function (a, b) {
         if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
         if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
 
@@ -176,16 +174,16 @@ new Vue({
       console.log("getting from api");
       fetch("https://api.tmf.zone/prod/v1/events")
         .then(response => response.json())
-        .then(function(data) {
+        .then(function (data) {
           self.events = data.body;
         })
-        .then(function() {
+        .then(function () {
           self.momentEvents();
         })
-        .then(function() {
+        .then(function () {
           self.filterEvents();
         })
-        .then(function() {
+        .then(function () {
           self.results = self.events;
           self.sortByTime();
           window.localStorage.setItem("treefortEvents", JSON.stringify(self.events));
@@ -194,12 +192,12 @@ new Vue({
 
       fetch("https://api.tmf.zone/prod/v1/performers")
         .then(response => response.json())
-        .then(function(data) {
+        .then(function (data) {
           self.performers = data.body;
         })
-      .then(function() {
-        window.localStorage.setItem("treefortPerformers", JSON.stringify(self.performers));
-      });
+        .then(function () {
+          window.localStorage.setItem("treefortPerformers", JSON.stringify(self.performers));
+        });
     }
   }
 });

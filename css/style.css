@@ -1,13 +1,33 @@
 body {
-  font-size: 28px;
+  font-size: 40px;
+}
+
+.select select, .input, body, .box, .input::placeholder {
+  background-color: #000;
+  color: #FFF;
 }
 
 .strike {
   text-decoration: line-through;
 }
 
+.box {
+  border: 1px solid #FFF;
+}
+
+.tag:not(body) {
+  font-size: 35px;
+}
+
 .table-artist-name {
   max-width: 230px;
+}
+
+.artist-bio {
+  font-size: 30px;
+}
+.artist-name {
+  font-size: 60px;
 }
 
 [v-cloak] { display:none; }

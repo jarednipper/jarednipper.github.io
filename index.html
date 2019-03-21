@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -8,7 +8,7 @@
 
   <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css'>
 
-      <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css">
 
 
 </head>
@@ -17,46 +17,46 @@
 
   <section class="section" id="app">
 
-  <div class="container">
+    <div class="container">
 
-    <div class="modal" v-bind:class="{ 'is-active':showArtistModal }">
-      <div class="modal-background" @click="showArtistModal = false" ></div>
-      <div class="modal-card">
-        <section class="modal-card-body">
-          <artist-details :event="selectedEvent" v-if="selectedEvent != null"></artist-details>
-        </section>
-      </div>
-    </div>
-
-    <div class="field">
-      <div class="control">
-        <div class="select is-fullwidth is-large">
-          <select v-model="selectedVenue" @change="venueSelected()">
-            <option :value="null">All Venues</option>
-            <option v-for="venue in venues()">{{ venue }}</option>
-          </select>
+      <div class="modal" v-bind:class="{ 'is-active':showArtistModal }">
+        <div class="modal-background" @click="showArtistModal = false"></div>
+        <div class="modal-card">
+          <section class="modal-card-body">
+            <artist-details :event="selectedEvent" v-if="selectedEvent != null"></artist-details>
+          </section>
         </div>
       </div>
-    </div>
 
-    <div class="field">
-      <div class="control">
-        <div class="select is-fullwidth is-large">
-          <select v-model="selectedGenre" @change="genreSelected()">
-            <option :value="null">All Genres</option>
-            <option v-for="genre in genres()">{{ genre }}</option>
-          </select>
+      <div class="field">
+        <div class="control">
+          <div class="select is-fullwidth is-large">
+            <select v-model="selectedVenue" @change="venueSelected()">
+              <option :value="null">All Venues</option>
+              <option v-for="venue in venues()">{{ venue }}</option>
+            </select>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="field">
-      <div class="control is-expanded">
-        <input v-model="searchValue" class="input is-large" type="text" placeholder="Artist" @keyUp="searchArtist">
+      <div class="field">
+        <div class="control">
+          <div class="select is-fullwidth is-large">
+            <select v-model="selectedGenre" @change="genreSelected()">
+              <option :value="null">All Genres</option>
+              <option v-for="genre in genres()">{{ genre }}</option>
+            </select>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+      <div class="field">
+        <div class="control is-expanded">
+          <input v-model="searchValue" class="input is-large" type="text" placeholder="Search Artists" @keyUp="searchArtist">
+        </div>
+      </div>
+
+      <!-- <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
       <thead>
         <tr>
           <th><a @click="sortByArtist">Artist</a></th>
@@ -69,16 +69,27 @@
         <td>{{ result.start_time_moment.format("ddd h:mma") }}</td>
         <td><a :href="venueUrl(result.venue)">{{ result.venue.name }}</a></td>
       </tr>
-    </table>
-  </div>
-</section>
+    </table> -->
+
+      <div class="box" v-for="result in results" v-cloak>
+        <div class="columns is-mobile">
+          <div class="column">{{ result.start_time_moment.format("ddd h:mma") }}</div>
+          <div v-bind:class="{ column: true, strike:result.cancelled }">
+            <a @click="setSelectedEvent(result)">{{ result.name }}</a>
+          </div>
+          <div class="column has-text-right">{{ result.venue.name }}</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.js'></script>
-<script src='https://unpkg.com/vue'></script>
-<script src='https://use.fontawesome.com/releases/v5.0.6/js/all.js'></script>
+  <script src='https://unpkg.com/vue'></script>
+  <!-- <script src='https://use.fontawesome.com/releases/v5.0.6/js/all.js'></script> -->
 
 
 
-    <script  src="js/index.js"></script>
+  <script src="js/index.js"></script>
 
 
 
