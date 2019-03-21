@@ -1,5 +1,9 @@
+html {
+  height: 100%;
+}
 body {
   font-size: 40px;
+  min-height: 100%;
 }
 
 .select select, .input, body, .box, .input::placeholder {
