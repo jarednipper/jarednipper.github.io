@@ -16,7 +16,9 @@ Vue.component('artist-details', {
             <p>{{ event.venue.name }}</p>
             <p>{{ event.start_time_moment.format("ddd h:mm") }} - {{ event.end_time_moment.format("h:mma") }}</p>
             <div>
-              <img v-bind:src="details.image_app_url" style="width: 100%" />
+              <figure class="image is-3by1">
+                <img v-bind:src="details.image_app_url" />
+              </figure>
             </div>
             <div>
               <p class="artist-bio">{{ details.bio || "" }}</p>
