@@ -21,8 +21,13 @@ Vue.component('artist-details', {
               </figure>
             </div>
             <div>
-              <p class="artist-bio">{{ details.bio || "" }}</p>
+              <a v-if="details.video_url" :href="details.video_url" target="_blank">Youtube</a><span v-if="details.video_url"> | </span>
+              <a v-if="details.spotify_url" :href="details.spotify_url" target="_blank">Spotify</a><span v-if="details.spotify_url"> | </span>
+              <a v-if="details.website_url" :href="details.website_url" target="_blank">Website</a>
             </div>
+            <!--<div>
+              <p class="artist-bio">{{ details.bio || "" }}</p>
+            </div>-->
           </div>
         </section>
 

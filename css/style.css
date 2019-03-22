@@ -6,6 +6,10 @@ body {
   min-height: 100%;
 }
 
+a {
+  color: #83c4e7;
+}
+
 .select select, .input, body, .box, .input::placeholder {
   background-color: #000;
   color: #FFF;
@@ -32,6 +36,11 @@ body {
 }
 .artist-name {
   font-size: 60px;
+}
+
+.hero.is-dark a:not(.button):not(.dropdown-item):not(.tag) {
+  color:#83c4e7;
+  font-size: 30px;
 }
 
 [v-cloak] { display:none; }
